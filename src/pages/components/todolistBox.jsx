@@ -31,6 +31,7 @@ const TodoListBox = ({ title, type, func }) => {
             ref={drop}
           >
             {todos !== null &&
+              todos !== undefined &&
               todos.map((todo, key) => {
                 if (type === "notdone" && todo.isCompleted === false) {
                   return <TodoItem todo={todo} key={key} />;
