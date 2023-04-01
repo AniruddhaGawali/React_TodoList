@@ -9,15 +9,19 @@ export default function Home() {
   const [todos, setTodos] = React.useState(null);
   const [isSyncing, setIsSyncing] = React.useState(false);
 
-  React.useEffect(() => {
+  const fetchData = async () => {
     setIsSyncing(true);
-    fetch("http://localhost:5000/get_todos")
+    await fetch("http://localhost:5000/get_todos")
       .then((response) => response.json())
       .then((json) => setTodos(json.data));
 
     setTimeout(() => {
       setIsSyncing(false);
     }, 2000);
+  };
+
+  React.useEffect(() => {
+    fetchData();
   }, []);
 
   const addTodo = async (text) => {
@@ -41,12 +45,8 @@ export default function Home() {
       .then((json) => console.log(json));
 
     setIsSyncing(false);
+    fetchData();
   };
-
-  // const deleteTodo = (id) => {
-  //   const newTodos = todos.filter((todo) => todo.id !== id);
-  //   setTodos(newTodos);
-  // };
 
   const completeTodo = async (todo_data) => {
     if (!todos.isCompleted) {
@@ -68,12 +68,14 @@ export default function Home() {
       });
 
       setIsSyncing(false);
+      fetchData();
     }
   };
 
   const incompleteTodo = async (todo_data) => {
     if (todo_data.isCompleted) {
       setIsSyncing(true);
+
       const newTodos = todos.map((todo) => {
         if (todo._id === todo_data._id) {
           todo.isCompleted = false;
@@ -89,6 +91,7 @@ export default function Home() {
         body: JSON.stringify(todo_data),
       });
       setIsSyncing(false);
+      fetchData();
     }
   };
 

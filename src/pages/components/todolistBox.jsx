@@ -34,9 +34,9 @@ const TodoListBox = ({ title, type, func }) => {
               todos !== undefined &&
               todos.map((todo, key) => {
                 if (type === "notdone" && todo.isCompleted === false) {
-                  return <TodoItem todo={todo} key={key} />;
+                  return <TodoItem todo={todo} key={key} func={func} />;
                 } else if (type === "done" && todo.isCompleted === true) {
-                  return <TodoItem todo={todo} key={key} />;
+                  return <TodoItem todo={todo} key={key} func={func} />;
                 }
               })}
           </div>

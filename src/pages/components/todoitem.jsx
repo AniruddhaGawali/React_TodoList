@@ -6,7 +6,7 @@ const itemTypes = {
   CARD: "card",
 };
 
-const TodoItem = ({ todo }) => {
+const TodoItem = ({ todo, func }) => {
   const [{ isDragging }, drag] = useDrag({
     type: "card",
     item: {
@@ -18,12 +18,28 @@ const TodoItem = ({ todo }) => {
   });
   return (
     <div
-      className={`flex items-center justify-between w-full px-4 py-2 bg-gray-200 rounded-lg ${
+      className={`flex items-center justify-start w-full px-4 py-2 bg-gray-200 rounded-lg ${
         isDragging ? "opacity-0" : ""
       }`}
       ref={drag}
     >
-      <h1 className={`text-gray-700 ${todo.isCompleted ? "line-through" : ""}`}>
+      <input
+        type="checkbox"
+        checked={todo.isCompleted}
+        onChange={(e) => {
+          console.log(e.target.checked);
+          const temp = {
+            _id: todo._id,
+            text: todo.text,
+            isCompleted: e.target.checked,
+          };
+          func(temp);
+        }}
+      />
+      <span className="mx-3">|</span>
+      <h1
+        className={`text-gray-700  ${todo.isCompleted ? "line-through" : ""}`}
+      >
         {todo.text}
       </h1>
     </div>
