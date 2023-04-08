@@ -54,6 +54,7 @@ const Table = ({ todos, remove }) => {
       dataIndex: "id",
       render: (text, row, index, action) => [
         <a
+          key={index}
           onClick={() => {
             if (window.confirm("Are you sure you want to delete this item?")) {
               remove(row);

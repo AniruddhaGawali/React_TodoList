@@ -23,22 +23,9 @@ const TodoItem = ({ todo, func }) => {
       }`}
       ref={drag}
     >
-      <input
-        type="checkbox"
-        checked={todo.isCompleted}
-        onChange={(e) => {
-          console.log(e.target.checked);
-          const temp = {
-            _id: todo._id,
-            text: todo.text,
-            isCompleted: e.target.checked,
-          };
-          func(temp);
-        }}
-      />
-      <span className="mx-3">|</span>
-      {/* {console.log(todo)} */}
-      <h1 className={`text-gray-700 `}>{todo.text}</h1>
+      <h1 className={`text-gray-700 `}>
+        {todo.text !== undefined ? todo.text : ""}
+      </h1>
     </div>
   );
 };
