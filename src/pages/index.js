@@ -14,7 +14,7 @@ export default function Home() {
 
   const fetchData = async () => {
     setIsSyncing(true);
-    await fetch("http://localhost:5000/get_todos")
+    await fetch("https://backend-todolist.up.railway.app/get_todos")
       .then((response) => response.json())
       .then((json) => {
         console.log(json.data);
@@ -43,7 +43,7 @@ export default function Home() {
 
     setIsSyncing(true);
 
-    await fetch("http://localhost:5000/add_todo", {
+    await fetch("https://backend-todolist.up.railway.app/add_todo", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -62,7 +62,7 @@ export default function Home() {
 
     const newTodos = todos.filter((item) => item._id !== todo_data._id);
 
-    await fetch("http://localhost:5000/delete_todo", {
+    await fetch("https://backend-todolist.up.railway.app/delete_todo", {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -84,7 +84,7 @@ export default function Home() {
     });
     setTodos(newTodos);
 
-    await fetch("http://localhost:5000/change_todo", {
+    await fetch("https://backend-todolist.up.railway.app/change_todo", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -106,7 +106,7 @@ export default function Home() {
     console.log(newTodos);
     setTodos(newTodos);
 
-    await fetch("http://localhost:5000/change_todo", {
+    await fetch("https://backend-todolist.up.railway.app/change_todo", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -126,7 +126,7 @@ export default function Home() {
       return todo;
     });
     setTodos(newTodos);
-    await fetch("http://localhost:5000/change_todo", {
+    await fetch("https://backend-todolist.up.railway.app/change_todo", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
