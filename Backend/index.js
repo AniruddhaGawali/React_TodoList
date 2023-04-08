@@ -14,6 +14,7 @@ app.get("/", (req, res) => {
 app.use("/add_todo", require("./addTodo"));
 app.use("/get_todos", require("./getTodos"));
 app.use("/change_todo", require("./changeTodo"));
+app.use("/delete_todo", require("./deleteTodo"));
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

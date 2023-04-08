@@ -30,13 +30,27 @@ const TodoListBox = ({ title, type, func }) => {
             }`}
             ref={drop}
           >
+            {/* {console.log(todos)} */}
             {todos !== null &&
               todos !== undefined &&
               todos.map((todo, key) => {
-                if (type === "notdone" && todo.isCompleted === false) {
+                // console.log(todo.dueDate);
+                if (
+                  Date.now() > new Date(todo.dueDate).getTime() &&
+                  (todo.status === "OPEN" || todo.status === "WORKING") &&
+                  type == "OVERDUE"
+                ) {
                   return <TodoItem todo={todo} key={key} func={func} />;
-                } else if (type === "done" && todo.isCompleted === true) {
+                } else if (type === "OPEN" && todo.status === "OPEN") {
+                  if (Date.now() < new Date(todo.dueDate).getTime()) {
+                    return <TodoItem todo={todo} key={key} func={func} />;
+                  }
+                } else if (type === "DONE" && todo.status === "DONE") {
                   return <TodoItem todo={todo} key={key} func={func} />;
+                } else if (type === "WORKING" && todo.status === "WORKING") {
+                  if (Date.now() < new Date(todo.dueDate).getTime()) {
+                    return <TodoItem todo={todo} key={key} func={func} />;
+                  }
                 }
               })}
           </div>

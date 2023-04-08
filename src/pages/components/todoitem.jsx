@@ -37,11 +37,8 @@ const TodoItem = ({ todo, func }) => {
         }}
       />
       <span className="mx-3">|</span>
-      <h1
-        className={`text-gray-700  ${todo.isCompleted ? "line-through" : ""}`}
-      >
-        {todo.text}
-      </h1>
+      {/* {console.log(todo)} */}
+      <h1 className={`text-gray-700 `}>{todo.text}</h1>
     </div>
   );
 };

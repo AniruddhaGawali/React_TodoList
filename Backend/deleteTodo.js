@@ -8,23 +8,14 @@ const uri =
 
 const client = new MongoClient(uri);
 
-router.post("/", async (req, res) => {
+router.delete("/", async (req, res) => {
   const todo_data = req.body;
   try {
     await client.connect();
     const database = client.db("todolist");
     const collection = database.collection("todos");
 
-    console.log(todo_data._id, todo_data.isCompleted);
-
-    await collection.updateMany(
-      { _id: new ObjectId(todo_data._id) },
-      {
-        $set: {
-          status: todo_data.status,
-        },
-      }
-    );
+    await collection.deleteOne({ _id: new ObjectId(todo_data._id) });
 
     res.json({ isSuccess: true });
   } catch (e) {
